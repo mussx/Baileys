@@ -45,7 +45,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install Dependencies
-        run: yarn install --immutable
+        run: yarn install
 
       - name: Publish in NPM (as `mussx-baileys`)
         run: npm publish --access public --provenance --tag latest
