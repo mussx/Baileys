@@ -42,7 +42,7 @@ const printMussxBanner = () => {
 		' '.repeat(Math.max(0, Math.floor((width - [...plain].length) / 2)))
 	console.log(
 		`\n${center('M U S S X')}${bold}${gradient('M U S S X')}\n` +
-			`${center('B A I L E Y S  v7.0.0-rc18')}${bold}${gradient('B A I L E Y S')}${reset}  ${dim}v7.0.0-rc18${reset}\n` +
+			`${center('B A I L E Y S  v7.0.0-rc19')}${bold}${gradient('B A I L E Y S')}${reset}  ${dim}v7.0.0-rc19${reset}\n` +
 			`${center('─────────────────────────────')}${dim}─────────────────────────────${reset}\n` +
 			`  ${gradient('✔ mussx-baileys ready')}\n` +
 			`${edge}  ┌────────────────────────────────────────┐${reset}\n` +
