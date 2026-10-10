@@ -34,16 +34,21 @@ const printMussxBanner = () => {
 
 	const dim = '\x1b[2m'
 	const bright = '\x1b[97m'
+	const bold = '\x1b[1m'
 	const reset = '\x1b[0m'
 	const edge = '\x1b[38;2;129;140;248m'
 	console.log(
-		`\n  ${gradient('✦ MUSSX BAILEYS ✦')}  ${dim}── v7.0.0-rc16 ──${reset}\n` +
+		`\n${bold}${gradient('  M U S S X')}\n` +
+			`${bold}${gradient('  B A I L E Y S')}${reset}  ${dim}v7.0.0-rc16${reset}\n` +
+			`  ${dim}─────────────────────────────${reset}\n` +
+			`  ${gradient('✔ mussx-baileys ready')}\n` +
 			`${edge}  ┌────────────────────────────────────────┐${reset}\n` +
+			`${edge}  │${reset}  ${gradient('✦ MUSSX BAILEYS ✦')}\n` +
 			`${edge}  │${reset}  ${dim}Owner :${reset} ${bright}MussX${reset}\n` +
 			`${edge}  │${reset}  ${dim}WA    :${reset} ${bright}wa.me/6287840535460${reset}\n` +
 			`${edge}  │${reset}  ${dim}Repo  :${reset} ${bright}github.com/mussx/Baileys${reset}\n` +
 			`${edge}  └────────────────────────────────────────┘${reset}\n` +
-			`  ${gradient('✔ mussx-baileys ready')}\n`
+			`  ${dim}© 2026 MussX${reset}\n`
 	)
 }
 
