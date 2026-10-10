@@ -1,5 +1,7 @@
+import { createRequire } from 'node:module'
 import type KeyedDB from '@adiwajshing/keyed-db'
 import type { Comparable } from '@adiwajshing/keyed-db/lib/Types'
+import { existsSync, readFileSync, writeFileSync } from 'fs'
 import type { Logger } from 'pino'
 import { proto } from '../../WAProto/index.js'
 import { DEFAULT_CONNECTION_CONFIG } from '../Defaults'
@@ -30,9 +32,10 @@ const makeInMemoryStore = (
 ) => {
 	const logger = _logger || DEFAULT_CONNECTION_CONFIG.logger.child({ stream: 'in-mem-store' })
 	chatKey = chatKey || waChatKey(true)
-	const KeyedDB = require('@adiwajshing/keyed-db').default as new (...args: any[]) => KeyedDB<Chat, string>
+	// keyed-db is CJS; load it via createRequire so this works in the ESM build
+	const KeyedDBImpl = createRequire(import.meta.url)('@adiwajshing/keyed-db').default as typeof KeyedDB
 
-	const chats = new KeyedDB(chatKey, (c: Chat) => c.id)
+	const chats = new KeyedDBImpl<Chat, string>(chatKey, (c: Chat) => c.id!)
 	const messages: { [_: string]: ReturnType<typeof makeMessagesDictionary> } = { }
 	const contacts: { [_: string]: Contact } = { }
 	const groupMetadata: { [_: string]: GroupMetadata } = { }
@@ -331,13 +334,9 @@ const makeInMemoryStore = (
 		toJSON,
 		fromJSON,
 		writeToFile: (path: string) => {
-			// require fs here so that in case "fs" is not available -- the app does not crash
-			const { writeFileSync } = require('fs')
 			writeFileSync(path, JSON.stringify(toJSON()))
 		},
 		readFromFile: (path: string) => {
-			// require fs here so that in case "fs" is not available -- the app does not crash
-			const { readFileSync, existsSync } = require('fs')
 			if(existsSync(path)) {
 				logger.debug({ path }, 'reading from file')
 				const jsonStr = readFileSync(path, { encoding: 'utf-8' })
