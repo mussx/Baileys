@@ -37,10 +37,13 @@ const printMussxBanner = () => {
 	const bold = '\x1b[1m'
 	const reset = '\x1b[0m'
 	const edge = '\x1b[38;2;129;140;248m'
+	// rata tengah mengikuti lebar box (44 kolom)
+	const center = (plain: string, width = 44) =>
+		' '.repeat(Math.max(0, Math.floor((width - [...plain].length) / 2)))
 	console.log(
-		`\n${bold}${gradient('  M U S S X')}\n` +
-			`${bold}${gradient('  B A I L E Y S')}${reset}  ${dim}v7.0.0-rc16${reset}\n` +
-			`  ${dim}─────────────────────────────${reset}\n` +
+		`\n${center('M U S S X')}${bold}${gradient('M U S S X')}\n` +
+			`${center('B A I L E Y S  v7.0.0-rc16')}${bold}${gradient('B A I L E Y S')}${reset}  ${dim}v7.0.0-rc16${reset}\n` +
+			`${center('─────────────────────────────')}${dim}─────────────────────────────${reset}\n` +
 			`  ${gradient('✔ mussx-baileys ready')}\n` +
 			`${edge}  ┌────────────────────────────────────────┐${reset}\n` +
 			`${edge}  │${reset}  ${gradient('✦ MUSSX BAILEYS ✦')}\n` +
